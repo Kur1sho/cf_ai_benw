@@ -9,6 +9,7 @@ https://cf-ai-benw.kur1sho.workers.dev
 ## What it does
 
 A fully-featured AI chat agent with:
+
 - Streaming AI responses powered by Workers AI
 - Persistent conversation memory via Durable Objects
 - Weather lookup tool
