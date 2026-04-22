@@ -95,8 +95,15 @@ If the user asks to schedule a task, use the schedule tool to schedule the task.
           }),
           execute: async ({ city }) => {
             // Replaced with a real weather API
-            const res = await fetch(`https://wttr.in/${encodeURIComponent(city)}?format=j1`);
-            const data = await res.json() as any;
+            const res = await fetch(
+              `https://wttr.in/${encodeURIComponent(city)}?format=j1`
+            );
+            const data = (await res.json()) as unknown as {
+              current_condition: {
+                temp_C: string;
+                weatherDesc: { value: string }[];
+              }[];
+            };
             return {
               city,
               temperature: data.current_condition[0].temp_C,
