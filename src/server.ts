@@ -94,14 +94,13 @@ If the user asks to schedule a task, use the schedule tool to schedule the task.
             city: z.string().describe("City name")
           }),
           execute: async ({ city }) => {
-            // Replace with a real weather API in production
-            const conditions = ["sunny", "cloudy", "rainy", "snowy"];
-            const temp = Math.floor(Math.random() * 30) + 5;
+            // Replaced with a real weather API
+            const res = await fetch(`https://wttr.in/${encodeURIComponent(city)}?format=j1`);
+            const data = await res.json() as any;
             return {
               city,
-              temperature: temp,
-              condition:
-                conditions[Math.floor(Math.random() * conditions.length)],
+              temperature: data.current_condition[0].temp_C,
+              condition: data.current_condition[0].weatherDesc[0].value,
               unit: "celsius"
             };
           }
